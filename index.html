@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container"> 
         <div class="demo-headline">
             <h1 class="demo-logo"></h1>
 
@@ -112,7 +112,7 @@
 
                             <p><span class="unit">Please note that if you are accessing any GitHub service in your capacity as a government entity, there are special terms that may apply to you.</span><span class="unit"> Please see Section G.</span><span class="unit">17, below, for more details.</span></p>
 
-                            <p><span class="highlighted palette-sun-flower" theme="arrnitration" text="This is because.... "> If GitHub makes material changes to these Terms, we will notify you by email or by posting a notice on our site before the changes are effective.</span><span class="unit">  Any new features that augment or enhance the current Service, including the release of new tools and resources, shall be subject to the Terms of Service.</span><span class="unit"> Continued use of the Service after any such changes shall constitute your consent to such changes.</span><span class="unit"> You can review the most current version of the Terms of Service at any time at: <a href="https://github.</span><span class="unit">com/site/terms">http://github.</span><span class="unit">com/site/terms</a></p>
+                            <p><span textid=1 class="highlighted color-primary" theme="theme1" text="This is because.... "> If GitHub makes material changes to these Terms, we will notify you by email or by posting a notice on our site before the changes are effective.</span><span class="unit">  Any new features that augment or enhance the current Service, including the release of new tools and resources, shall be subject to the Terms of Service.</span><span class="unit"> Continued use of the Service after any such changes shall constitute your consent to such changes.</span><span class="unit"> You can review the most current version of the Terms of Service at any time at: <a href="https://github.</span><span class="unit">com/site/terms">http://github.</span><span class="unit">com/site/terms</a></p>
 
                             <p><span class="unit">Violation of any of the terms below will result in the termination of your Account.</span><span class="unit"> While GitHub prohibits such conduct and Content on the Service, you understand and agree that GitHub cannot be responsible for the Content posted on the Service and you nonetheless may be exposed to such materials.</span><span class="unit"> You agree to use the Service at your own risk.</span></p>
 
@@ -158,7 +158,7 @@
 
                             <ol>
                                 <li>
-                                    <p><span class="unit">You expressly understand and agree that GitHub shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses (even if GitHub has been advised of the possibility of such damages), resulting from your use of the API or third-party products that access data via the API.</span></p>
+                                    <p><span textid=2 class="highlighted color-success" theme="theme2" text="other text">  You expressly understand and agree that GitHub shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses (even if GitHub has been advised of the possibility of such damages), resulting from your use of the API or third-party products that access data via the API.</span></p>
                                 </li>
 
                                 <li>
@@ -347,6 +347,19 @@
                 </div>
               </div> <!-- /toolbar -->
 
+			  <div id="commentCol"> 
+				  <div class="commentBox box-primary" textid=1> 
+				  	<div class="arrow arrow-primary"> </div>
+				  	<p> Text contains theme1, Theme2</p>				  	
+				  </div>
+
+				  <div class="commentBox box-primary" textid=2> 
+				  	<div class="arrow arrow-primary"> </div>
+				  	<p> This other text contains other themes</p>				  	
+				  </div>
+				  
+			  </div>
+			  
             </div>
             
             </div><!-- /.</span><span class="unit">demo-content-wide -->
@@ -354,6 +367,7 @@
         </div>
     </div><!-- /container -->
 
+<div id="navBox"> </div>
     <footer>
         <div class="container">
             <div class="row">
@@ -458,7 +472,43 @@
 		}
 	}); 
 	//click to hide back
+
+
+
+$( window ).scroll(function() {
+	// show hide the navigation box
+	var textTop = $('#text').offset();
+	var viewTop = $( window ).scrollTop();
+	if(viewTop> textTop.top){
+		$('#navBox').show(); 
+	} else {
+		$('#navBox').show(); 		
+	}
+});
+function PlaceComments(){
+	// go through each .commentBox element
+	$('.commentBox').each(function(){
+		var content = $(this).attr('textid');  // get the textid attribute
+		console.log('content ' + content); 
+		var selector =  ".highlighted[textid="+content+"]"; 
+		var position = $(selector).position(); // get the offset from top of the highlighted element with id attribute = id
+		console.log('position top: ' + position.top); 
+		$(this).css('top', position.top); 
+	}); 
+}	
+
+
+
+function NavBox(){
 	
+	
+	var viewHeight = $( window ).height(); // get viewport height;
+	var textHeight = $('#text').height(); // get text height
+	$('#navBox').height(viewHeight-100); 	
+}
+
+PlaceComments();
+NavBox();	
  })();
 
 
