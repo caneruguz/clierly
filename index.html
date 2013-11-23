@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-info">Money/a>
+                <a href="#fakelink" class="btn btn-block btn-info">Money</a>
             </div>
 
             <div class="col-md-2">
@@ -394,13 +394,17 @@
 </script><script src="http://198.100.45.68/static/js/jquery.tagsinput.js" type="text/javascript">
 </script><script src="http://198.100.45.68/static/js/jquery.placeholder.js" type="text/javascript">
 </script><script src="http://198.100.45.68/static/js/jquery.stacktable.js" type="text/javascript">
+</script><script src="js/jquery.scrollTo.min.js" type="text/javascript">
+
 </script><script src="http://vjs.zencdn.net/4.1/video.js" type="text/javascript">
 </script><script src="js/application.js" type="text/javascript">
 </script>
 
 <script type="text/javascript">
 
-(function(){ 	
+(function(){ 
+
+	
 	$('#text').find('p').hide();  // Hide all paragraphs first
 	$('<div class="hiddenMsg">This content is hidden. Click the box to show. </div>').insertAfter('#text p');		// show div that says paragraph is not important for hidden. Show option to show.  
 	$('.highlighted').parent('p').show().find('.hiddenMsg').hide();// show paragraphs that have highlighted content
@@ -412,7 +416,7 @@
 	});
 
 	// Show contents when message 
-	$('.hiddenMsg').on('click', function(){
+	$(document).on('click', '.hiddenMsg', function(){
 		$(this).hide().prev('p').show();
 	}); 
 
@@ -467,8 +471,16 @@
 			
 		}
 	}); 
-	//click to hide back
 
+
+$(document).on('click', '.strip', function(){
+	var textid = $(this).attr('textid'); // get textid
+	var selector =  ".highlighted[textid="+textid+"]"; 
+/* 	var scrollTop = $(selector).scrollTop(); */
+	
+	$(window).scrollTo(selector);
+	console.log('hi');
+}); 
 
 
 $(window).scroll(function() {
@@ -487,7 +499,7 @@ $(window).scroll(function() {
 
 		// top offset of pageHolder
 		var pageOffset = ((viewTop-1200)*navBoxHeight)/textHeight; 
-		$('#pageHolder').css('margin-top', pageOffset+10); 
+		$('#pageHolder').css('margin-top', pageOffset-5); 
 		
 	} else {
 		$('#navBox').hide(); 		
@@ -502,6 +514,17 @@ function PlaceComments(){
 		var selector =  ".highlighted[textid="+content+"]"; 
 		var position = $(selector).position(); // get the offset from top of the highlighted element with id attribute = id
 		$(this).css('top', position.top); 
+	}); 
+	$('.strip').each(function(){
+		var content = $(this).attr('textid');  // get the textid attribute
+		var selector =  ".highlighted[textid="+content+"]"; 
+		var position = $(selector).position(); // get the offset from top of the highlighted element with id attribute = id
+		var navBoxHeight = $('#navBox').height(); 
+		var textHeight = $('#text').height();// get total height of the text
+		var stripOffset = ((position.top)*navBoxHeight)/textHeight; 
+		$(this).css('margin-top', stripOffset); 
+		console.log('content: '+navBoxHeight); 
+		
 	}); 
 }	
 
@@ -547,11 +570,14 @@ function SetData(){
 	}
 	console.log(textDump);
 	$('#text').html(textDump); 
-}
+				$('<div class="hiddenMsg">This content is hidden. Click the box to show. </div>').insertAfter('#text p');		// show div that says paragraph is not important for hidden. Show option to show.  
+			$('.highlighted').parent('p').show();// show paragraphs that have highlighted content
 
+}
+$('#navBox').hide(); 
 SetData();
-PlaceComments();
 NavBox();
+PlaceComments();
 	
  })();
 
