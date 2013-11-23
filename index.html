@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- Loading Bootstrap -->
     <link href="http://198.100.45.68/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"><!-- Loading Flat UI -->
     <link href="http://198.100.45.68/static/css/flat-ui.css" rel="stylesheet" type="text/css">
-    <link href="http://198.100.45.68/static/css/demo.css" rel="stylesheet" type="text/css">
+    <link href="css/demo.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="http://198.100.45.68/static/images/favicon.ico"><!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -365,7 +365,8 @@
         </div>
     </div><!-- /container -->
 
-<div id="navBox"> </div>
+<div id="navBox"><div id="pageHolder"></div> </div>
+
     <footer>
         <div class="container">
             <div class="row">
@@ -398,7 +399,7 @@
 </script><script src="http://198.100.45.68/static/js/jquery.placeholder.js" type="text/javascript">
 </script><script src="http://198.100.45.68/static/js/jquery.stacktable.js" type="text/javascript">
 </script><script src="http://vjs.zencdn.net/4.1/video.js" type="text/javascript">
-</script><script src="http://198.100.45.68/static/js/application.js" type="text/javascript">
+</script><script src="js/application.js" type="text/javascript">
 </script>
 <script type="text/javascript">
 
@@ -436,7 +437,7 @@
 			} else {
 				$('#textForm').removeClass('has-error');  	
 				$('#errorMsg').html(''); 	
-				$.post('./parser', {text:content}, function(res){
+				$.post('http://clierly.doesntexist.com/parser', {text:content}, function(res){
 				   $('#textpaste').val(res);
 				});
 			}	
@@ -459,9 +460,9 @@
 			$('#text').find('p').hide();
 			$('<div class="hiddenMsg">This content is hidden. Click the box to show. </div>').insertAfter('#text p');		// show div that says paragraph is not important for hidden. Show option to show.  
 			$('.highlighted').parent('p').show().find('.hiddenMsg').hide();// show paragraphs that have highlighted content
-			$('#showToggle').removeClass('active').html('<span class="fui-eye">  Show All');		
-
-				
+			$('#showToggle').html('<span class="fui-eye"> Show All');		
+			$('#showToggle').removeClass('active'); 
+			debugger; 
 		} else {
 			$('#text').find('p').fadeIn();
 			$('.hiddenMsg').remove(); 
@@ -473,15 +474,31 @@
 
 
 
-$( window ).scroll(function() {
+$(window).scroll(function() {
 	// show hide the navigation box
 	var textTop = $('#text').offset();
 	var viewTop = $( window ).scrollTop();
-	if(viewTop> textTop.top){
-		$('#navBox').show(); 
+	if(viewTop> textTop.top-200){
+		$('#navBox').show();
+		
+		// height of pageHolder
+		var viewHeight = $( window ).height(); // get the window height
+		var textHeight = $('#text').height();// get total height of the text
+		var navBoxHeight = $('#navBox').height(); 
+		var pageHeight = (viewHeight*navBoxHeight) / textHeight; 
+		$('#pageHolder').height(pageHeight); 
+		console.log('pageHeight: ' + pageHeight); 
+
+		// top offset of pageHolder
+		var pageOffset = ((viewTop-1200)*navBoxHeight)/textHeight; 
+		$('#pageHolder').css('margin-top', pageOffset+10); 
+		console.log('pageoffset : ' + pageOffset);
+		
 	} else {
-		$('#navBox').show(); 		
+		$('#navBox').hide(); 		
 	}
+	
+	
 });
 function PlaceComments(){
 	// go through each .commentBox element
@@ -495,14 +512,11 @@ function PlaceComments(){
 	}); 
 }	
 
-
-
 function NavBox(){
-	
-	
 	var viewHeight = $( window ).height(); // get viewport height;
 	var textHeight = $('#text').height(); // get text height
-	$('#navBox').height(viewHeight-100); 	
+	$('#navBox').height(viewHeight-100); 
+		
 }
 
 PlaceComments();

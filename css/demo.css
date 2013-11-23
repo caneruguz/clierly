@@ -102,13 +102,19 @@ background-color: rgba(238, 238, 238, 0.28);
 	float: left;
 	position: absolute;
 	}
+	
 #navBox {
-	width: 20px;
+	width: 50px;
 	background-color: #eee;
 	position: fixed;
 	right: 40px;
-	top: 50px; 
-	
+	top: 50px; 	
+}
+#pageHolder {
+	width: 54px;
+	border: 2px solid #7676a3; 
+	height: 40px; 
+	margin-left: -2px;
 }
 
 #text a {

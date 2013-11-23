@@ -49,13 +49,17 @@ String.prototype.repeat = function(num) {
     $("input, textarea").placeholder();
 
     // Make pagination demo work
+/*
     $(".pagination a").on('click', function() {
       $(this).parent().siblings("li").removeClass("active").end().addClass("active");
     });
+*/
 
+/*
     $(".btn-group a").on('click', function() {
       $(this).siblings().removeClass("active").end().addClass("active");
     });
+*/
 
     // Disable link clicks to prevent page scrolling
     $('a[href="#fakelink"]').on('click', function (e) {
