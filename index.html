@@ -422,7 +422,9 @@
 			} else {
 				$('#textForm').removeClass('has-error');  	
 				$('#errorMsg').html(''); 	
-				
+				$.post('./parser', {text:content}, function(res){
+				   $('#textpaste').val(res);
+				});
 			}	
 	}); 
 
