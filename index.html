@@ -76,27 +76,27 @@
 
         <div class="row demo-row">
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-primary">Theme 1</a>
+                <a href="#fakelink" class="btn btn-block btn-primary">Content</a>
             </div>
 
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-warning">Theme 2</a>
+                <a href="#fakelink" class="btn btn-block btn-warning">Change</a>
             </div>
 
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-default">Theme 3</a>
+                <a href="#fakelink" class="btn btn-block btn-info">Money/a>
             </div>
 
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-danger">Theme 4</a>
+                <a href="#fakelink" class="btn btn-block btn-danger">Violation</a>
             </div>
 
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-inverse">Theme 5</a>
+                <a href="#fakelink" class="btn btn-block btn-inverse">Personal Information</a>
             </div>
 
             <div class="col-md-2">
-                <a href="#fakelink" class="btn btn-block btn-success">Theme 6</a>
+                <a href="#fakelink" class="btn btn-block btn-success">Risk</a>
             </div>
         </div>
         <hr class="soften">
@@ -349,15 +349,8 @@
               </div> <!-- /toolbar -->
 
 			  <div id="commentCol"> 
-				  <div class="commentBox box-primary" textid=1> 
-				  	<div class="arrow arrow-primary"> </div>
-				  	<p> Text contains theme1, Theme2</p>				  	
-				  </div>
 
-				  <div class="commentBox box-primary" textid=2> 
-				  	<div class="arrow arrow-primary"> </div>
-				  	<p> This other text contains other themes</p>				  	
-				  </div>
+
 				  
 			  </div>
 			  
@@ -491,12 +484,10 @@ $(window).scroll(function() {
 		var navBoxHeight = $('#navBox').height(); 
 		var pageHeight = (viewHeight*navBoxHeight) / textHeight; 
 		$('#pageHolder').height(pageHeight); 
-		console.log('pageHeight: ' + pageHeight); 
 
 		// top offset of pageHolder
 		var pageOffset = ((viewTop-1200)*navBoxHeight)/textHeight; 
 		$('#pageHolder').css('margin-top', pageOffset+10); 
-		console.log('pageoffset : ' + pageOffset);
 		
 	} else {
 		$('#navBox').hide(); 		
@@ -538,19 +529,12 @@ function SetData(){
 				classText = "highlighted "; 
 				classText += m.categories.join(" ");
 				
-				// Set comments here 
-			var commentHTML = '<div class="commentBox box-primary" textid=2> <div class="arrow arrow-primary"> </div><p> This other text contains other themes</p></div>' ;
-				  
-				  
-			$('.commentBox').each(function(){
-				var content = $(this).attr('textid');  // get the textid attribute
-				var selector =  ".highlighted[textid="+content+"]"; 
-				var position = $(selector).position(); // get the offset from top of the highlighted element with id attribute = id
-				$(this).css('top', position.top); 
-			}); 
+			// Set comments here 
+			var commentHTML = '<div class="commentBox '+m.categories.join(" ")+'" textid="'+i+'_'+n+'"> <div class="arrow arrowColor"> </div><p>'+m.categories.join(" ")+'</p></div>' ;
 			$('#commentCol').append(commentHTML); 				
-				
-								 
+			
+			var stripHTML = '<div class="strip '+m.categories.join(" ")+'" textid="'+i+'_'+n+'"> </div>';
+			$('#navBox').append(stripHTML);   				 
 			}
 			if(m.text != ""){
 				m.text += ". ";  
@@ -566,7 +550,7 @@ function SetData(){
 }
 
 SetData();
-//PlaceComments();
+PlaceComments();
 NavBox();
 	
  })();

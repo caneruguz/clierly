@@ -51,32 +51,38 @@ background-color: rgba(238, 238, 238, 0.28);
 .color-default {
 	color: #bdc3c7; 
 }
-.box-primary{
+.commentBox {
+	padding: 10px 10px 1px 10px;
+	float: left;
+	position: absolute;
+	background-color: #bdc3c7; 
+	color: #fff;	
+	}
+.commentBox p {
+	font-size: 14px; 
+}
+#commentCol .Content{
 	background-color: #1abc9c; 
 	color: #fff;
 }
-.box-warning {
+#commentCol .Change {
 	background-color: #f5d313;
 	color: #fff;
 }
-.box-danger {
+#commentCol .Violation {
  	background-color: #ec7063; 
-	color: #222;
-}			fff
-.box-inverse {
+	color: #fff;
+}			
+#commentCol .Personal {
 	background-color: #ec7063; 
 	color: #fff;
 }
-.box-success {
+#commentCol .Risk {
 	background-color: #ec7063; 
-	color: #222;
-}			fff
-.box-info {
+	color: #fff;
+}			
+#commentCol .Money {
 	background-color: #3498db; 
-	color: #fff;
-}
-.box-default {
-	background-color: #bdc3c7; 
 	color: #fff;
 }
 
@@ -85,23 +91,77 @@ background-color: rgba(238, 238, 238, 0.28);
 	height: 0; 
 	float: left; 
 		margin-left: -19px;	 
-
-}
-
-.arrow-primary {
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent; 	
-	border-right:10px solid #1abc9c; 
+	border-right:10px solid #bdc3c7;
 }
+
+#commentCol .Content .arrowColor {
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 	
+	border-right:10px solid #1abc9c;
+}
+#commentCol .Change .arrowColor{
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 	
+	border-right:10px solid #f5d313;
+}
+#commentCol .Violation .arrowColor{
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 	
+	border-right:10px solid #ec7063;
+}			
+#commentCol .Personal .arrowColor{
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 	
+	border-right:10px solid #ec7063;
+}
+#commentCol .Risk .arrowColor{
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 	
+	border-right:10px solid #ec7063;
+}			
+#commentCol .Money .arrowColor{
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 	
+	border-right:10px solid #3498db;
+}
+.strip{
+	width: 100%; 
+	height: 5px; 
+	background-color: #3498db; 
+}
+
+#text .Content{
+	color: #1abc9c; 
+}
+#text .Change {
+	color: #f5d313;
+
+}
+#text .Violation {
+ 	color: #ec7063; 
+
+}			
+#text .Personal {
+	color: #ec7063; 
+
+}
+#text .Risk {
+	color: #ec7063; 
+
+}			
+#text .Money {
+	color: #3498db; 
+}
+
+
+
 
 #commentCol {
 	margin-top: 20px; 
 }
-.commentBox {
-	padding: 10px 10px 1px 10px;
-	float: left;
-	position: absolute;
-	}
+
 	
 #navBox {
 	width: 50px;
@@ -115,6 +175,7 @@ background-color: rgba(238, 238, 238, 0.28);
 	border: 2px solid #7676a3; 
 	height: 40px; 
 	margin-left: -2px;
+	position: absolute; 
 }
 
 #text a {
