@@ -405,9 +405,11 @@
 (function(){ 
 
 	
+/*
 	$('#text').find('p').hide();  // Hide all paragraphs first
 	$('<div class="hiddenMsg">This content is hidden. Click the box to show. </div>').insertAfter('#text p');		// show div that says paragraph is not important for hidden. Show option to show.  
 	$('.highlighted').parent('p').show().find('.hiddenMsg').hide();// show paragraphs that have highlighted content
+*/
 	$('.unit').on('mouseenter', function(){
 		$(this).css('color', '#34495e'); 
 	});
@@ -570,8 +572,9 @@ function SetData(){
 	}
 	console.log(textDump);
 	$('#text').html(textDump); 
+	$()
 				$('<div class="hiddenMsg">This content is hidden. Click the box to show. </div>').insertAfter('#text p');		// show div that says paragraph is not important for hidden. Show option to show.  
-			$('.highlighted').parent('p').show();// show paragraphs that have highlighted content
+			$('.highlighted').parent('p').show().next('.hiddenMsg').hide();// show paragraphs that have highlighted content
 
 }
 $('#navBox').hide(); 
