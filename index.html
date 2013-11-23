@@ -508,10 +508,8 @@ function PlaceComments(){
 	// go through each .commentBox element
 	$('.commentBox').each(function(){
 		var content = $(this).attr('textid');  // get the textid attribute
-		console.log('content ' + content); 
 		var selector =  ".highlighted[textid="+content+"]"; 
 		var position = $(selector).position(); // get the offset from top of the highlighted element with id attribute = id
-		console.log('position top: ' + position.top); 
 		$(this).css('top', position.top); 
 	}); 
 }	
@@ -523,8 +521,54 @@ function NavBox(){
 		
 }
 
-PlaceComments();
-NavBox();	
+function SetData(){
+	var total = example.length; 
+	var i, o, textDump = ""; 
+	
+	for(i =0; i < total; i++){ // paragraph level 
+		o = example[i]; 
+		textDump += '<p class="textP">';
+		var pTotal = o.length; 
+		var n,m, classText, contentText; 
+		for(n=0; n<pTotal; n++){  // sentence level 
+			m = o[n]; 
+			if(m.categories.length == 0){
+				classText="unit"; 
+			} else {
+				classText = "highlighted "; 
+				classText += m.categories.join(" ");
+				
+				// Set comments here 
+			var commentHTML = '<div class="commentBox box-primary" textid=2> <div class="arrow arrow-primary"> </div><p> This other text contains other themes</p></div>' ;
+				  
+				  
+			$('.commentBox').each(function(){
+				var content = $(this).attr('textid');  // get the textid attribute
+				var selector =  ".highlighted[textid="+content+"]"; 
+				var position = $(selector).position(); // get the offset from top of the highlighted element with id attribute = id
+				$(this).css('top', position.top); 
+			}); 
+			$('#commentCol').append(commentHTML); 				
+				
+								 
+			}
+			if(m.text != ""){
+				m.text += ". ";  
+			}
+			
+			textDump += '<span textid="'+i+'_'+n+'" class=" '+classText+'">'+m.text+'</span>'; //prepare
+		}
+		textDump += '</p>'; 
+		
+	}
+	console.log(textDump);
+	$('#text').html(textDump); 
+}
+
+SetData();
+//PlaceComments();
+NavBox();
+	
  })();
 
 
